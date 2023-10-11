@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+
+
+		.animals{position: absolute; left: 10px; padding-top: 300px;}
+
+		#poetText{font-family: 'Roboto Mono', monospace; z-index: 9;position: absolute;left: 100px; top: 50px; font-size: 2rem; color: orangered;}
+		.word{opacity: 0;animation: fadein 1.5s forwards; animation-iteration-count: 1;}
+		@keyframes fadein{
+			to{opacity: 1;}
+		}
+
+		body{cursor: url('mouse1.png'),auto;}
+
+		body{background: url(grass.jpg); margin: auto;}
+		
+
+
+	</style>
+
+	<title>Bright Future Farm</title>
+</head>
+<body>
+
+	<audio id='audio' src='creep2.mp3'></audio>
+
+	<div id="poetText"></div>
+
+	<script type="text/javascript">
+
+
+		var poet = "Do you know exactly what you're doing?<br> Then, you belong here!<br> Welcome to 'Bright Future Farm'.<br><br>Not a single creep is allowed in here.<br> Remove'em before they ruin EVERYTHING.<br>"
+		var poetArr = poet.split(" ");
+		console.log(poetArr);
+
+		var myTimer = setInterval(print,100);
+		var s=0;
+
+		function print(){
+			var t= document.createElement("span");
+			t.innerHTML = poetArr[s] + " ";
+			t.className = "word";
+			s++;
+			poetText.appendChild(t);
+
+			if(s == poetArr.length){
+				clearInterval(myTimer);
+			}
+		} 
+
+
+		var a = ["piglet","bigcow","thom"];
+		var images = [];
+
+	
+		function handleImageClick(event) {
+			event.target.style.display = "none";
+
+		
+			if (images.every(img => img.style.display === "none")) {
+				images.forEach(img => img.style.display = "block");
+			}
+		}
+
+	for(var i=0;i<15;i++){
+		var t = document.createElement("img");
+		t.src = a[randomBH(0,2)] + ".png";
+		t.className = "animals";
+		t.style.width = "auto";
+		t.style.height = randomBH(150,200) + "px";
+		t.style.left = Math.random()*screen.availWidth + "px";
+		t.style.top = Math.random()*screen.availHeight + "px";
+
+			images.push(t);
+
+			t.addEventListener("click", handleImageClick);
+
+			document.body.appendChild(t);
+		}
+
+		function randomBH(min, max) {
+			min = Math.ceil(min); 
+			max = Math.floor(max);
+		return Math.floor(Math.random() * (max - min +1)) + min;
+		}
+
+		document.body.onclick = function play(){
+		var audio = document.getElementById("audio")
+		audio.play()
+		}
+
+
+
+	</script>
+
+</body>
+
+
+</html> 
